@@ -17,6 +17,7 @@ To run the docker:
     - /mnt/cache/appdata/cctv/mlapi:/config
     ports:
     - "5000:5000"
+   # command: python3 ./mlapi.py -c mlapiconfig.ini    
 ```   
    
 To start the server first time:
@@ -30,5 +31,8 @@ Start service
 ```
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
+
+Once first start is complete, uncomment the command section in the docker-compose for subsequent runs.
+
 
 The docker incorporates yolov and coral models as well as Open CV built from source.
