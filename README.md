@@ -19,7 +19,7 @@ To run the docker:
     - "5000:5000"
 ```   
    
-To start the server first time type below:
+To start the server first time:
 
 Create user
 ```
