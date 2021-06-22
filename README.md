@@ -19,11 +19,9 @@ To run the docker:
     - "5000:5000"
 ```   
    
-   
-
-
 To start the server first time type below, it will prompt you to create at least one user.
 ```
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
 
+The docker incorporates all models (including coral) as well as Open CV built from source.
