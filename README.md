@@ -4,7 +4,7 @@ Docker container for https://github.com/pliablepixels/mlapi
 Modify 
 objectconfig.ini to your requirements.
 
-To run the server:
+To run the docker:
 
 ```
  mlapi:
@@ -23,7 +23,7 @@ To run the server:
 
 
 To start the server first time type below, it will prompt you to create at least one user.
-
+```
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
-
+```
 
