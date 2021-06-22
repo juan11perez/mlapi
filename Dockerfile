@@ -1,4 +1,4 @@
-FROM phusion/baseimage:master
+FROM	phusion/baseimage:master
 
 ENV	OPEN_CV_VERSION="4.5.2" \
 	MAKE_THREADS="12" \
@@ -6,7 +6,7 @@ ENV	OPEN_CV_VERSION="4.5.2" \
 	NVIDIA_VISIBLE_DEVICES="all" \
 	NVIDIA_DRIVER_CAPABILITIES="compute,utility,video"
 
-COPY init/ /etc/my_init.d/
+COPY	init/ /etc/my_init.d/
 
 RUN 	apt-get update && DEBIAN_FRONTEND=noninteractive \
 	apt-get -y install --no-install-recommends software-properties-common runit-systemd && \
