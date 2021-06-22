@@ -17,6 +17,7 @@ To run the docker:
     - /mnt/cache/appdata/cctv/mlapi:/config
     ports:
     - "5000:5000"
+   # command: python3 ./mlapi.py -c mlapiconfig.ini    
 ```   
    
 To start the server first time:
