@@ -4,7 +4,7 @@
 #
 #
 # Github URL for opencv zip file download.
-# Current default is to pull the version 4.3.0 release.
+# Current default is to pull the version 4.5.2 release.
 #
 # Search for config files, if they don't exist, create the default ones
 
@@ -40,12 +40,6 @@ if [ ! -d /config/opencv ]; then
 	echo "Creating opencv folder in config folder"
 	mkdir /config/opencv
 fi
-
-# Create db folder if it doesn't exist
-# if [ ! -d /config/db ]; then
-# 	echo "Creating db folder in config folder"
-# 	mkdir /config/db
-# fi
 
 # Handle db dir
 if [ -d /var/lib/zmeventnotification/db ]; then
