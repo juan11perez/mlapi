@@ -31,4 +31,4 @@ Start service
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
 
-The docker incorporates all models (including coral) as well as Open CV built from source.
+The docker incorporates yolov and coral models as well as Open CV built from source.
