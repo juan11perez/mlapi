@@ -8,7 +8,7 @@ ENV	OPEN_CV_VERSION="4.5.2" \
 
 COPY init/ /etc/my_init.d/
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
+RUN 	apt-get update && DEBIAN_FRONTEND=noninteractive \
 	apt-get -y install --no-install-recommends software-properties-common runit-systemd && \
 	apt-get -y install curl wget git ffmpeg build-essential cmake unzip pkg-config libjpeg-dev libpng-dev libtiff-dev libavcodec-dev \
 	libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev libatlas-base-dev gfortran python3-dev python3-pip ca-certificates \
@@ -39,15 +39,12 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
 #Set the workdir
 WORKDIR ${APP_DIR}
 
-#Add all the Python source
-# ADD ./ .
-
 RUN	apt-get -y install python3-pip && \
 	apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 curl gnupg gnupg2 gnupg1 && \
 	cd /var/lib/zmeventnotification/ && \
 	git clone https://github.com/pliablepixels/mlapi.git . && git fetch --tags && \
 	git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && \
-    pip3 install -r requirements.txt && \
+    	pip3 install -r requirements.txt && \
 	pip3 install face_recognition && \
 	cd /var/lib/zmeventnotification/ && \
 	mkdir -p models/tinyyolov3 && \
@@ -71,12 +68,12 @@ RUN	apt-get -y install python3-pip && \
 	wget https://github.com/google-coral/edgetpu/raw/master/test_data/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite && \
 	wget https://github.com/google-coral/test_data/raw/master/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite && \
 	wget https://github.com/google-coral/test_data/raw/master/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite && \
-    apt-get clean autoclean && \
-    apt-get autoremove --yes && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}
+    	apt-get clean autoclean && \
+    	apt-get autoremove --yes && \
+   	rm -rf /var/lib/{apt,dpkg,cache,log}
 
 # install coral usb libraries
-RUN apt-get update && echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
+RUN 	apt-get update && echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
 	curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
 	apt-get update && apt-get -y install gasket-dkms libedgetpu1-std python3-pycoral &&\
 	apt install -y syslog-ng && \
