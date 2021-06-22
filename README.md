@@ -32,4 +32,12 @@ Start service
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
 
+Once first start is complete, uncomment the command section in the docker-compose for subsequent runs.
+
+
 The docker incorporates yolov and coral models as well as Open CV built from source.
+
+
+
+
+
