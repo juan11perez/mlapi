@@ -17,22 +17,24 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
 	apt-get clean autoclean && \
 	apt-get autoremove --yes && \
 	rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
-	cd /root && \
-	wget -q -O opencv.zip https://github.com/opencv/opencv/archive/${OPEN_CV_VERSION}.zip && \
-	wget -q -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPEN_CV_VERSION}.zip && \
-	unzip opencv.zip && \
-	unzip opencv_contrib.zip && \
-	mv $(ls -d opencv-*) opencv && \
-	mv opencv_contrib-${OPEN_CV_VERSION} opencv_contrib && \
-	rm *.zip && \
-	cd /root/opencv && \
-	mkdir build && \
-	cd build && \
-	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D INSTALL_PYTHON_EXAMPLES=OFF -D INSTALL_C_EXAMPLES=OFF -D OPENCV_ENABLE_NONFREE=ON -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib/modules -D HAVE_opencv_python3=ON -D PYTHON_EXECUTABLE=/usr/bin/python3 -D PYTHON2_EXECUTABLE=/usr/bin/python2 -D BUILD_EXAMPLES=OFF .. >/dev/null && \
-	make -j4 && \
-	make install && \
-	cd /root && \
-	rm -r opencv* && \
+
+	pip3 install opencv-contrib-python && \
+	# cd /root && \
+	# wget -q -O opencv.zip https://github.com/opencv/opencv/archive/${OPEN_CV_VERSION}.zip && \
+	# wget -q -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPEN_CV_VERSION}.zip && \
+	# unzip opencv.zip && \
+	# unzip opencv_contrib.zip && \
+	# mv $(ls -d opencv-*) opencv && \
+	# mv opencv_contrib-${OPEN_CV_VERSION} opencv_contrib && \
+	# rm *.zip && \
+	# cd /root/opencv && \
+	# mkdir build && \
+	# cd build && \
+	# cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D INSTALL_PYTHON_EXAMPLES=OFF -D INSTALL_C_EXAMPLES=OFF -D OPENCV_ENABLE_NONFREE=ON -D OPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib/modules -D HAVE_opencv_python3=ON -D PYTHON_EXECUTABLE=/usr/bin/python3 -D PYTHON2_EXECUTABLE=/usr/bin/python2 -D BUILD_EXAMPLES=OFF .. >/dev/null && \
+	# make -j4 && \
+	# make install && \
+	# cd /root && \
+	# rm -r opencv* && \
 	mkdir -p ${APP_DIR} && \
 	chmod 777 ${APP_DIR}
 
@@ -40,13 +42,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
 WORKDIR ${APP_DIR}
 
 #Add all the Python source
-# ADD ./ .
+ADD ./ .
 
 RUN	apt-get -y install python3-pip && \
 	apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 curl gnupg gnupg2 gnupg1 && \
-	cd /var/lib/zmeventnotification/ && \
-	git clone https://github.com/pliablepixels/mlapi.git . && git fetch --tags && \
-	git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && \
     pip3 install -r requirements.txt && \
 	pip3 install face_recognition && \
 	cd /var/lib/zmeventnotification/ && \
