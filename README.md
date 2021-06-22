@@ -19,7 +19,14 @@ To run the docker:
     - "5000:5000"
 ```   
    
-To start the server first time type below, it will prompt you to create at least one user.
+To start the server first time type below:
+
+Create user
+```
+docker exec -it mlapi python3 mlapi_dbuser.py
+```
+
+Start service
 ```
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
