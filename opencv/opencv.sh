@@ -262,8 +262,8 @@ logger "Opencv source downloaded" -tEventServer
 logger "Compiling opencv..." -tEventServer
 
 #
-# Have user confirm that cuda and cudnn are enabled by the cmake.
-#
+# Have user confirm that cuda and cudnn are enabled by the cmake. specify a CUDA_ARCH_BIN and ARCHITECTURE.
+# (https://developer.nvidia.com/cuda-gpus#compute)
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D INSTALL_PYTHON_EXAMPLES=OFF \
