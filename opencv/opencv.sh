@@ -313,8 +313,7 @@ pip3 install face-recognition
 #
 # Now reinstall dlib package to ensure it detects GPU.
 #
-cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib
-python3 setup.py install
+cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
 #
 
 # Clean up/remove unnecessary packages
