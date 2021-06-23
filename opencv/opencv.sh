@@ -38,7 +38,7 @@ CUDA_VER=11.2
 # Current default is to pull the version 4.5.1 release.
 #   Note: You shouldn't need to change these.
 #
-OPENCV_VER=4.5.1
+OPENCV_VER=4.5.2
 OPENCV_URL=https://github.com/opencv/opencv/archive/$OPENCV_VER.zip
 OPENCV_CONTRIB_URL=https://github.com/opencv/opencv_contrib/archive/$OPENCV_VER.zip
 #
@@ -126,6 +126,13 @@ fi
 # Remove face-recognition module
 #
 pip3 uninstall -y face-recognition
+
+#
+# Remove dlib module
+#
+pip3 uninstall -y dlib
+
+
 
 logger "Compiling opencv with GPU Support" -tEventServer
 
@@ -263,7 +270,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D WITH_CUDA=ON \
 	-D WITH_CUDNN=ON \
 	-D OPENCV_DNN_CUDA=ON \
-	-D CUDA_ARCH_BIN=6.1 \	
+	-D CUDA_ARCH_BIN=6.1 \
 	-D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-$CUDA_VER \
 	-D ENABLE_FAST_MATH=1 \
 	-D CUDA_FAST_MATH=1 \
@@ -302,12 +309,19 @@ ldconfig
 pip3 install face-recognition
 
 #
+# Now reinstall dlib package to ensure it detects GPU.
+#
+cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib
+python3 setup.py install
+#
+
 # Clean up/remove unnecessary packages
 #
 logger "Cleaning up..." -tEventServer
 
 cd ~
 rm -r opencv*
+rm -r dlib*
 
 logger "Opencv compile completed" -tEventServer
 
