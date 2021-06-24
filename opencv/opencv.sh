@@ -333,6 +333,10 @@ if [ $QUIET_MODE != 'yes' ];then
 	echo "  python3"
 	echo "  import cv2"
 	echo "  print(cv2.getBuildInformation())"
+	echo "Now check that dlib is working with gpu."
+	echo "Execute the following commands:"
+	echo "  import dlib"
+	echo "  dlib.DLIB_USE_CUDA"
 	echo "  Ctrl-D to exit"
 	echo
 	echo "Verify that the import does not show errors."
