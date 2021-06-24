@@ -36,20 +36,31 @@ Subsequent "automatic" starts
 There's likely a better way to do this, but I dont know and the folowing works:
 
 start container with "command: python3 ./mlapi.py -c mlapiconfig.ini" commented. >> 
-```docker-compose up -d mlapi
+```
+docker-compose up -d mlapi
 ```
 Create user >> 
-```docker exec -it mlapi python3 mlapi_dbuser.py```
+```
+docker exec -it mlapi python3 mlapi_dbuser.py
+```
 Start service >> 
-```docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini```
+```
+docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
+```
 Commit/save as follows:
 get ContainerID with >> 
-```docker ps | grep "mlapi"```
+```
+docker ps | grep "mlapi"
+```
 Save with >> 
-```docker commit <ContainerID> ghcr.io/juan11perez/mlapi```
+```
+docker commit <ContainerID> ghcr.io/juan11perez/mlapi
+```
 remove container
 Uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container 
-```docker-compose up -d mlapi```
+```
+docker-compose up -d mlapi
+```
 
 
 The docker incorporates yolov and coral models as well as Open CV built from source.
