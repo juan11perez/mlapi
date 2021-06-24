@@ -313,6 +313,17 @@ logger "Cleaning up..." -tEventServer
 cd ~
 rm -r opencv*
 
+#
+# Remove dlib module
+#
+pip3 uninstall -y dlib
+#
+# Now reinstall dlib package to ensure it detects GPU.
+#
+cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
+#
+cd ~ ; rm -r dlib*
+
 logger "Opencv compile completed" -tEventServer
 
 if [ $QUIET_MODE != 'yes' ];then
@@ -334,15 +345,3 @@ if [ $QUIET_MODE != 'yes' ];then
 	echo "The opencv.sh script will run when the Docker is updated so you won't"
 	echo "have to do it manually."
 fi
-
-
-#
-# Remove dlib module
-#
-# pip3 uninstall -y dlib
-#
-# Now reinstall dlib package to ensure it detects GPU.
-#
-# cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
-#
-# cd ~ ; rm -r dlib*
