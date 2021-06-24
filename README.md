@@ -50,7 +50,7 @@ docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 Commit/save as follows:
 Get ContainerID with >> 
 ```
-docker ps | grep "mlapi"
+docker ps | grep "mlapi" | cut -d " " -f1
 ```
 Save with >> 
 ```
