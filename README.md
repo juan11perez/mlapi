@@ -33,7 +33,7 @@ docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
 Subsequent "automatic" starts
 
-There's likely a better way to do this, but I dont know and the folowing works:
+There's likely a better way to do this, but I dont know it and the folowing works:
 
 start container with "command: python3 ./mlapi.py -c mlapiconfig.ini" commented. >> 
 ```
