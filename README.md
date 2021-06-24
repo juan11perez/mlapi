@@ -2,7 +2,7 @@
 Docker container for https://github.com/pliablepixels/mlapi
 
 Modify 
-mlapiconfig.ini to your requirements.
+objectconfig.ini to your requirements.
 
 To run the docker:
 
@@ -17,25 +17,22 @@ To run the docker:
     - /mnt/cache/appdata/cctv/mlapi:/config
     ports:
     - "5000:5000"
-    command: python3 ./mlapi.py -c mlapiconfig.ini    
+   # command: python3 ./mlapi.py -c mlapiconfig.ini    
 ```   
-Image creates default user:admin password:admin   
    
-To modify the user, type below command. If the container is re-created you will need to re-create your specifc user.
+To start the server first time:
 
+Create user
 ```
 docker exec -it mlapi python3 mlapi_dbuser.py
 ```
 
-Start service manually
+Start service
 ```
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
 
+Once first start is complete, uncomment the command section in the docker-compose for subsequent runs.
+
 
 The docker incorporates yolov and coral models as well as Open CV built from source.
-
-
-
-
-
