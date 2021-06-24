@@ -21,7 +21,7 @@ To run the docker:
 ```   
 Image creates default user:admin password:admin   
    
-To modify the user use below. If the container is recreated you will need to create your specifc user again.
+To modify the user type below command. If the container is recreated you will need to re-create your specifc user.
 
 ```
 docker exec -it mlapi python3 mlapi_dbuser.py
