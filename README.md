@@ -2,7 +2,7 @@
 Docker container for https://github.com/pliablepixels/mlapi
 
 Modify 
-objectconfig.ini to your requirements.
+mlapiconfig.ini to your requirements.
 
 To run the docker:
 
