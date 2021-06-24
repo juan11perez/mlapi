@@ -48,7 +48,7 @@ Start service >>
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
 Commit/save as follows:
-get ContainerID with >> 
+Get ContainerID with >> 
 ```
 docker ps | grep "mlapi"
 ```
@@ -56,8 +56,7 @@ Save with >>
 ```
 docker commit <ContainerID> ghcr.io/juan11perez/mlapi
 ```
-remove container
-Uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container 
+Remove container; uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container 
 ```
 docker-compose up -d mlapi
 ```
