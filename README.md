@@ -36,7 +36,8 @@ Subsequent "automatic" starts
 There's likely a better way to do this, but I dont know and the folowing works:
 
 start container with "command: python3 ./mlapi.py -c mlapiconfig.ini" commented. >> 
-```docker-compose up -d mlapi```
+```docker-compose up -d mlapi
+```
 Create user >> 
 ```docker exec -it mlapi python3 mlapi_dbuser.py```
 Start service >> 
