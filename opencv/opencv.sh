@@ -127,11 +127,6 @@ fi
 #
 pip3 uninstall -y face-recognition
 
-#
-# Remove dlib module
-#
-pip3 uninstall -y dlib
-
 logger "Compiling opencv with GPU Support" -tEventServer
 
 #
@@ -227,10 +222,6 @@ else
 fi
 logger "cuDNN Package installed" -tEventServer
 
-# nvcc command activation
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$ && \
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-
 #
 # Compile opencv with cuda support
 #
@@ -262,8 +253,8 @@ logger "Opencv source downloaded" -tEventServer
 logger "Compiling opencv..." -tEventServer
 
 #
-# Have user confirm that cuda and cudnn are enabled by the cmake. specify a CUDA_ARCH_BIN and ARCHITECTURE.
-# (https://developer.nvidia.com/cuda-gpus#compute)
+# Have user confirm that cuda and cudnn are enabled by the cmake.
+#
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D INSTALL_PYTHON_EXAMPLES=OFF \
@@ -310,19 +301,17 @@ ldconfig
 #
 pip3 install face-recognition
 
-#
-# Now reinstall dlib package to ensure it detects GPU.
-#
-cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
-#
+# nvcc command activation
+echo "export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$"
+echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
+#
 # Clean up/remove unnecessary packages
 #
 logger "Cleaning up..." -tEventServer
 
 cd ~
 rm -r opencv*
-rm -r dlib*
 
 logger "Opencv compile completed" -tEventServer
 
@@ -345,3 +334,15 @@ if [ $QUIET_MODE != 'yes' ];then
 	echo "The opencv.sh script will run when the Docker is updated so you won't"
 	echo "have to do it manually."
 fi
+
+
+#
+# Remove dlib module
+#
+# pip3 uninstall -y dlib
+#
+# Now reinstall dlib package to ensure it detects GPU.
+#
+# cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
+#
+# cd ~ ; rm -r dlib*
