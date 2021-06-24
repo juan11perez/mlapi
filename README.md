@@ -17,17 +17,17 @@ To run the docker:
     - /mnt/cache/appdata/cctv/mlapi:/config
     ports:
     - "5000:5000"
-   # command: python3 ./mlapi.py -c mlapiconfig.ini    
+    command: python3 ./mlapi.py -c mlapiconfig.ini    
 ```   
+Image creates default user:admin password:admin   
    
-To start the server first time:
+To modify the user use below. If the container is recreated you will need to create your specifc user again.
 
-Create user
 ```
 docker exec -it mlapi python3 mlapi_dbuser.py
 ```
 
-Start service
+Start service manually
 ```
 docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
 ```
