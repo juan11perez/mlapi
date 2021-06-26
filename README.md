@@ -19,7 +19,8 @@ mlapiconfig.ini to your requirements. To run the docker:
    
 To start the server first time:
 
-Create user ```docker exec -it mlapi python3 mlapi_dbuser.py```
+Create user 
+```docker exec -it mlapi python3 mlapi_dbuser.py```
 
 Start service ```docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini```
 
