@@ -301,28 +301,29 @@ ldconfig
 #
 pip3 install face-recognition
 
-# nvcc command activation
-echo "export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$"
-echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-
 #
 # Clean up/remove unnecessary packages
 #
 logger "Cleaning up..." -tEventServer
 
-cd ~
-rm -r opencv*
+cd ~ ; rm -r opencv*
 
 #
-# Remove dlib module
+# Now reinstall dlib package to ensure it detects GPU; remove dlib module
 #
 pip3 uninstall -y dlib
 #
-# Now reinstall dlib package to ensure it detects GPU.
-#
+cd /usr/local/cuda ; cp -r cuda-11.2/* . >/dev/null
 cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
-#
+ls /usr/local/cuda | grep -v "cuda-11.2" | xargs rm -r >/dev/null
 cd ~ ; rm -r dlib*
+#
+
+# nvcc command activation
+export PATH=/usr/local/cuda/cuda-$CUDA_VER/bin${PATH:+:${PATH}}$
+export LD_LIBRARY_PATH=/usr/local/cuda/cuda-$CUDA_VER/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# echo "export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$"
+# echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
 logger "Opencv compile completed" -tEventServer
 
