@@ -20,24 +20,30 @@ mlapiconfig.ini to your requirements. To run the docker:
 To start the server first time:
 
 Create user 
-```docker exec -it mlapi python3 mlapi_dbuser.py```
+```
+docker exec -it mlapi python3 mlapi_dbuser.py
+```
 
-Start service ```docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini```
+Start service 
+```
+docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
+```
 
 Subsequent "automatic" starts. There's likely a better way to do this, but I dont know it and the folowing works:
 
-Start the container with "command: python3 ./mlapi.py -c mlapiconfig.ini" commented out. (per above example) ```docker-compose up -d mlapi```
+Once container/service is running with above instructions; save the "modified" image as follows:
 
-Create user ```docker exec -it mlapi python3 mlapi_dbuser.py```
+Get ContainerID with 
+```
+docker ps | grep "mlapi" | cut -d " " -f1
+```
 
-Start service ```docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini```
+Save with 
+```
+docker commit <ContainerID> ghcr.io/juan11perez/mlapi
+```
 
-Commit/save as follows:
-Get ContainerID with ```docker ps | grep "mlapi" | cut -d " " -f1```
-
-Save with ```docker commit <ContainerID> ghcr.io/juan11perez/mlapi```
-
-Remove container; uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container ```docker-compose up -d mlapi```
+Remove container; uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container
 
 
 The docker incorporates yolov and coral models as well as Open CV built from source.
