@@ -22,13 +22,9 @@ To start the server first time:
 
 Create user ```docker exec -it mlapi python3 mlapi_dbuser.py```
 
-Start service
-```
-docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
-```
-Subsequent "automatic" starts
+Start service ```docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini```
 
-There's likely a better way to do this, but I dont know it and the folowing works:
+Subsequent "automatic" starts. There's likely a better way to do this, but I dont know it and the folowing works:
 
 Start the container with "command: python3 ./mlapi.py -c mlapiconfig.ini" commented out. (per above example) >> 
 ```
