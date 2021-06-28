@@ -41,16 +41,11 @@ if [ ! -d /config/opencv ]; then
 	mkdir /config/opencv
 fi
 
-# # Handle db dir
-# if [ -d /var/lib/zmeventnotification/db ]; then
-# 	echo "Moving db dir"
-# 	mv /var/lib/zmeventnotification/db /config/
-# else
-# 	echo "Dir db already moved"
-# fi
-
-# # Symbolic link for db dir
-# ln -sf /config/db/ /var/lib/zmeventnotification/
+# Create db folder if it doesn't exist
+if [ ! -d /config/db ]; then
+	echo "Creating db folder in config folder"
+	mkdir /config/db
+fi
 
 # Set ownership for unRAID
 PUID=${PUID:-99}
@@ -131,7 +126,8 @@ chown -R $PUID:$PGID /config/hook
 chmod -R 777 /config/hook
 
 # start service
-if [ -f  /var/lib/zmeventnotification/db/db.json ]; then
+# if [ -f  /var/lib/zmeventnotification/db/db.json ]; then
+if [ -f  /config/db/db.json ]; then
 	echo "Starting services..."
 	python3 /var/lib/zmeventnotification/mlapi.py -c mlapiconfig.ini
 fi
