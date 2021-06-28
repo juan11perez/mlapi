@@ -1,8 +1,7 @@
 # mlapi
 Docker container for https://github.com/pliablepixels/mlapi
 
-Modify 
-mlapiconfig.ini to your requirements. To run the docker:
+Start the container:
 ```
  mlapi:
     container_name: mlapi
@@ -14,33 +13,24 @@ mlapiconfig.ini to your requirements. To run the docker:
     - /mnt/cache/appdata/cctv/mlapi:/config
     ports:
     - "5000:5000"
-   # command: python3 ./mlapi.py -c mlapiconfig.ini    
 ```   
-   
-To start the server first time:
 
 Create user 
 ```
-docker exec -it mlapi python3 mlapi_dbuser.py
+docker exec -it mlapi /bin/bash
+```
+```
+cd /config && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
+```
+```
+exit
 ```
 
-Start service 
-```
-docker exec -itd mlapi python3 ./mlapi.py -c mlapiconfig.ini
-```
+At this time modify secrets.ini and mlapiconfig.ini in /config. **If you restart without modifying these files the containe will fail.   
+   
+Restart the container.
 
-Subsequent "automatic" starts. There's likely a better way to do this, but I dont know it and the folowing works:
 
-Once container/service is running with above instructions; save the "modified" image as follows:
-
-Get ContainerID with 
-```
-docker ps | grep "mlapi" | cut -d " " -f1
-```
-
-Save with 
-```
-docker commit <ContainerID> ghcr.io/juan11perez/mlapi
 ```
 
 Remove container; uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container
