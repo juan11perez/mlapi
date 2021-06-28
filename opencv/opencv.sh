@@ -313,17 +313,17 @@ cd ~ ; rm -r opencv*
 #
 pip3 uninstall -y dlib
 #
-cd /usr/local/cuda ; cp -r cuda-11.2/* . >/dev/null
+cd /usr/local/cuda ; cp -r cuda-11.2/* . >/dev/null 2>&1
 cd ~/ ; git clone https://github.com/davisking/dlib.git ; cd dlib ; python3 setup.py install
-ls /usr/local/cuda | grep -v "cuda-11.2" | xargs rm -r >/dev/null
+ls /usr/local/cuda | grep -v "cuda-11.2" | xargs rm -r >/dev/null 2>&1
 cd ~ ; rm -r dlib*
 #
 
 # nvcc command activation
 export PATH=/usr/local/cuda/cuda-$CUDA_VER/bin${PATH:+:${PATH}}$
 export LD_LIBRARY_PATH=/usr/local/cuda/cuda-$CUDA_VER/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-# echo "export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$"
-# echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 logger "Opencv compile completed" -tEventServer
 
