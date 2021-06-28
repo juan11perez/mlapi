@@ -2,21 +2,20 @@
 FROM		phusion/baseimage:master
 
 ENV		OPEN_CV_VERSION="4.5.2" \
-		MAKE_THREADS="12" \
 		APP_DIR="/var/lib/zmeventnotification" \
+		DEBCONF_NONINTERACTIVE_SEEN="true" \
+		DEBIAN_FRONTEND=noninteractive \
 		NVIDIA_VISIBLE_DEVICES="all" \
 		NVIDIA_DRIVER_CAPABILITIES="compute,utility,video"
 
 COPY		init/ /etc/my_init.d/
 
-RUN		apt-get update && DEBIAN_FRONTEND=noninteractive \
-		apt-get -y install --no-install-recommends software-properties-common runit-systemd && \
-		apt-get -y install curl wget git ffmpeg build-essential cmake unzip pkg-config libjpeg-dev libpng-dev libtiff-dev libavcodec-dev \
-		libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev libatlas-base-dev gfortran python3-dev python3-pip ca-certificates \
-		python3 python-dev libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev &&\
+RUN		apt-get update && \
+		apt-get -y install --no-install-recommends software-properties-common curl wget git ffmpeg build-essential cmake unzip pkg-config \
+		libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev \
+		libatlas-base-dev gfortran python3-dev python3-pip ca-certificates python3 python-dev libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev &&\
 		pip3 install numpy && \
-		apt-get clean autoclean && \
-		apt-get autoremove --yes && \
+		apt-get clean autoclean && apt-get autoremove --yes && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
 		cd /root && \
 		wget -q -O opencv.zip https://github.com/opencv/opencv/archive/${OPEN_CV_VERSION}.zip && \
@@ -40,11 +39,12 @@ RUN		apt-get update && DEBIAN_FRONTEND=noninteractive \
 #Set the workdir
 WORKDIR		${APP_DIR}
 
-RUN		apt-get -y install python3-pip && \
-		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 curl gnupg gnupg2 gnupg1 && \
+RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 curl gnupg gnupg2 gnupg1 && \
 		cd /var/lib/zmeventnotification/ && \
 		git clone https://github.com/pliablepixels/mlapi.git . && git fetch --tags && \
 		git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && \
+		# Replace db path in mlapiconfig.ini file
+		sed -i 's#db_path=./db#db_path=/config/db#g' /var/lib/zmeventnotification/mlapiconfig.ini  && \
 		pip3 install -r requirements.txt && \
 		pip3 install face_recognition && \
 		cd /var/lib/zmeventnotification/ && \
@@ -72,9 +72,6 @@ RUN		apt-get -y install python3-pip && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}
-
-# create initial mlapi user:admin password:admin
-# COPY	db.json /var/lib/zmeventnotification/db
 
 # install coral usb libraries
 RUN 		apt-get update && echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
