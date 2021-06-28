@@ -41,16 +41,16 @@ if [ ! -d /config/opencv ]; then
 	mkdir /config/opencv
 fi
 
-# Handle db dir
-if [ -d /var/lib/zmeventnotification/db ]; then
-	echo "Moving db dir"
-	mv /var/lib/zmeventnotification/db /config/
-else
-	echo "Dir db already moved"
-fi
+# # Handle db dir
+# if [ -d /var/lib/zmeventnotification/db ]; then
+# 	echo "Moving db dir"
+# 	mv /var/lib/zmeventnotification/db /config/
+# else
+# 	echo "Dir db already moved"
+# fi
 
-# Symbolic link for db dir
-ln -sf /config/db/ /var/lib/zmeventnotification/
+# # Symbolic link for db dir
+# ln -sf /config/db/ /var/lib/zmeventnotification/
 
 # Set ownership for unRAID
 PUID=${PUID:-99}
