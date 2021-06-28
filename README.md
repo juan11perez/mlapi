@@ -26,14 +26,8 @@ cd /config && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
 exit
 ```
 
-At this time modify secrets.ini and mlapiconfig.ini in /config. **If you restart without modifying these files the containe will fail.   
+At this time modify secrets.ini and mlapiconfig.ini in /config. **If you restart without modifying these files the containe will fail.**   
    
 Restart the container.
-
-
-```
-
-Remove container; uncomment "command: python3 ./mlapi.py -c mlapiconfig.ini" and start container
-
 
 The docker incorporates yolov and coral models as well as Open CV built from source.
