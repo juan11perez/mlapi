@@ -15,7 +15,7 @@ Start the container:
     - "5000:5000"
 ```   
 
-Create user 
+Create user in the persistent config volume with below command:
 ```
 docker exec -it mlapi /bin/bash
 ```
