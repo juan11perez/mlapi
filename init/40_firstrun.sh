@@ -126,8 +126,7 @@ chown -R $PUID:$PGID /config/hook
 chmod -R 777 /config/hook
 
 # start service
-# if [ -f  /var/lib/zmeventnotification/db/db.json ]; then
-if [ -f  /config/db/db.json ]; then
+if [ -f /config/db/db.json ]; then
 	echo "Starting services..."
 	python3 /var/lib/zmeventnotification/mlapi.py -c mlapiconfig.ini
 fi
