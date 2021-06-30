@@ -40,7 +40,7 @@ RUN		apt-get update && \
 #Set the workdir
 WORKDIR		${APP_DIR}
 
-RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 curl gnupg gnupg2 gnupg1 && \
+RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 gnupg gnupg2 gnupg1 && \
 		cd /var/lib/zmeventnotification/ && \
 		git clone https://github.com/pliablepixels/mlapi.git . && git fetch --tags && \
 		git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && \
