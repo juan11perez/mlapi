@@ -5,7 +5,7 @@ Start the container:
 ```
  mlapi:
     container_name: mlapi
-    image: ghcr.io/juan11perez/mlapi
+    image: juan11perez/mlapi
     restart: unless-stopped
     privileged: true
     hostname: UNRAID  
