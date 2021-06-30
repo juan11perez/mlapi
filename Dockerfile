@@ -9,6 +9,7 @@ ENV		OPEN_CV_VERSION="4.5.2" \
 		NVIDIA_DRIVER_CAPABILITIES="compute,utility,video"
 
 COPY		init/ /etc/my_init.d/
+RUN		chmod +x /etc/my_init.d/*
 
 RUN		apt-get update && \
 		apt-get -y install --no-install-recommends software-properties-common curl wget git ffmpeg build-essential cmake unzip pkg-config \
