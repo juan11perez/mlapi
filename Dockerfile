@@ -6,7 +6,8 @@ ENV		OPEN_CV_VERSION="4.5.2" \
 		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		DEBIAN_FRONTEND=noninteractive \
 		NVIDIA_VISIBLE_DEVICES="all" \
-		NVIDIA_DRIVER_CAPABILITIES="compute,utility,video"
+		NVIDIA_DRIVER_CAPABILITIES="compute,utility,video" \
+		SERVER_PORT="5000"
 
 COPY		init/ /etc/my_init.d/
 RUN		chmod +x /etc/my_init.d/*
@@ -82,7 +83,7 @@ RUN 		apt-get update && echo "deb https://packages.cloud.google.com/apt coral-ed
 		sed -i s#3.13#3.25#g /etc/syslog-ng/syslog-ng.conf && \
 		sed -i 's#use_dns(no)#use_dns(yes)#' /etc/syslog-ng/syslog-ng.conf
 
-HEALTHCHECK 	--start-period=2s --interval=5s --timeout=3s CMD curl -f http://localhost/health || exit 1
+HEALTHCHECK 	--interval=30s --timeout=5s --start-period=5s CMD curl --fail http://localhost:$SERVER_PORT/health || exit 1
 
 VOLUME		["/config"]
 
