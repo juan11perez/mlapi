@@ -82,6 +82,8 @@ RUN 		apt-get update && echo "deb https://packages.cloud.google.com/apt coral-ed
 		sed -i s#3.13#3.25#g /etc/syslog-ng/syslog-ng.conf && \
 		sed -i 's#use_dns(no)#use_dns(yes)#' /etc/syslog-ng/syslog-ng.conf
 
+HEALTHCHECK 	--start-period=2s --interval=5s --timeout=3s CMD curl -f http://localhost/health || exit 1
+
 VOLUME		["/config"]
 
 EXPOSE		5000
