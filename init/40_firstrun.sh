@@ -109,12 +109,25 @@ if [ ! -d /config/hook/coral_edgetpu ]; then
 	mkdir -p /config/hook/coral_edgetpu
 fi
 
+# # Handle the coco_indexed.names file
+# if [ -f /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names ]; then
+# 	echo "Moving mcoco_indexed.names"
+# 	mv /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names /config/hook/coral_edgetpu/
+# else
+# 	echo "Dir coral_edgetpu already moved"
+# fi
+
 # Handle the coco_indexed.names file
 if [ -f /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names ]; then
-	echo "Moving mcoco_indexed.names"
-	mv /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names /config/hook/coral_edgetpu/
+	echo "Moving coco_indexed.names"
+	cp /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names /config/hook/coral_edgetpu/coco_indexed.names.default
+	if [ ! -f /config/hook/coral_edgetpu/coco_indexed.names ]; then
+		mv /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names  /config/hook/coral_edgetpu/coco_indexed.names
+	else
+		rm -rf /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names
+	fi
 else
-	echo "Dir coral_edgetpu already moved"
+	echo "File coco_indexed.names already moved"
 fi
 
 # Symbolic link for coral_edgetpu in /config
