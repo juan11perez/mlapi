@@ -109,14 +109,6 @@ if [ ! -d /config/hook/coral_edgetpu ]; then
 	mkdir -p /config/hook/coral_edgetpu
 fi
 
-# # Handle the coco_indexed.names file
-# if [ -f /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names ]; then
-# 	echo "Moving mcoco_indexed.names"
-# 	mv /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names /config/hook/coral_edgetpu/
-# else
-# 	echo "Dir coral_edgetpu already moved"
-# fi
-
 # Handle the coco_indexed.names file
 if [ -f /var/lib/zmeventnotification/models/coral_edgetpu/coco_indexed.names ]; then
 	echo "Moving coco_indexed.names"
