@@ -1,5 +1,5 @@
 # mlapi
-Docker container for https://github.com/pliablepixels/mlapi
+Docker container for https://github.com/zoneminder/mlapi
 
 Start the container:
 ```
