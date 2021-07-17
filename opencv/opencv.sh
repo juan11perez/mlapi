@@ -38,7 +38,7 @@ CUDA_VER=11.2
 # Current default is to pull the version 4.5.1 release.
 #   Note: You shouldn't need to change these.
 #
-OPENCV_VER=4.5.2
+OPENCV_VER=4.5.3
 OPENCV_URL=https://github.com/opencv/opencv/archive/$OPENCV_VER.zip
 OPENCV_CONTRIB_URL=https://github.com/opencv/opencv_contrib/archive/$OPENCV_VER.zip
 #
