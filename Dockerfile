@@ -1,7 +1,7 @@
 # mlapi https://github.com/zoneminder/mlapi
 FROM		phusion/baseimage:master
 
-ENV		OPEN_CV_VERSION="4.5.2" \
+ENV		OPEN_CV_VERSION="4.5.3" \
 		APP_DIR="/var/lib/zmeventnotification" \
 		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		DEBIAN_FRONTEND=noninteractive \
