@@ -1,4 +1,4 @@
-# mlapi https://github.com/pliablepixels/mlapi
+# mlapi https://github.com/zoneminder/mlapi
 FROM		phusion/baseimage:master
 
 ENV		OPEN_CV_VERSION="4.5.2" \
@@ -42,7 +42,7 @@ WORKDIR		${APP_DIR}
 
 RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 gnupg gnupg2 gnupg1 && \
 		cd /var/lib/zmeventnotification/ && \
-		git clone https://github.com/pliablepixels/mlapi.git . && git fetch --tags && \
+		git clone https://github.com/zoneminder/mlapi.git . && git fetch --tags && \
 		git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && \
 		# Replace db path in mlapiconfig.ini file
 		sed -i 's#db_path=./db#db_path=/config/db#g' /var/lib/zmeventnotification/mlapiconfig.ini  && \
