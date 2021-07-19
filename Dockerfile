@@ -49,27 +49,29 @@ RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libe
 		pip3 install -r requirements.txt && \
 		pip3 install face_recognition && \
 		cd /var/lib/zmeventnotification/ && \
-		mkdir -p models/tinyyolov3 && \
-		wget https://pjreddie.com/media/files/yolov3-tiny.weights -O models/tinyyolov3/yolov3-tiny.weights && \
-		wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3-tiny.cfg -O models/tinyyolov3/yolov3-tiny.cfg && \
-		wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/tinyyolov3/coco.names && \
-		mkdir -p models/yolov3 && \
-		wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg -O models/yolov3/yolov3.cfg && \
-		wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/yolov3/coco.names && \
-		wget https://pjreddie.com/media/files/yolov3.weights -O models/yolov3/yolov3.weights && \
-		mkdir -p models/tinyyolov4 && \
-		wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights -O models/tinyyolov4/yolov4-tiny.weights && \
-		wget https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/yolov4-tiny.cfg -O models/tinyyolov4/yolov4-tiny.cfg && \
-		wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/tinyyolov4/coco.names && \
-		mkdir -p models/yolov4 && \
-		wget https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/yolov4.cfg -O models/yolov4/yolov4.cfg && \
-		wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/yolov4/coco.names && \
-		wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights -O models/yolov4/yolov4.weights && \
-		mkdir -p models/coral_edgetpu && \
-		wget https://dl.google.com/coral/canned_models/coco_labels.txt -O models/coral_edgetpu/coco_indexed.names && \
-		wget https://github.com/google-coral/edgetpu/raw/master/test_data/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite && \
-		wget https://github.com/google-coral/test_data/raw/master/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite && \
-		wget https://github.com/google-coral/test_data/raw/master/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite && \
+		mkdir models && \
+		yes | INSTALL_CORAL_EDGETPU=yes ./get_models.sh && \
+		# mkdir -p models/tinyyolov3 && \
+		# wget https://pjreddie.com/media/files/yolov3-tiny.weights -O models/tinyyolov3/yolov3-tiny.weights && \
+		# wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3-tiny.cfg -O models/tinyyolov3/yolov3-tiny.cfg && \
+		# wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/tinyyolov3/coco.names && \
+		# mkdir -p models/yolov3 && \
+		# wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg -O models/yolov3/yolov3.cfg && \
+		# wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/yolov3/coco.names && \
+		# wget https://pjreddie.com/media/files/yolov3.weights -O models/yolov3/yolov3.weights && \
+		# mkdir -p models/tinyyolov4 && \
+		# wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights -O models/tinyyolov4/yolov4-tiny.weights && \
+		# wget https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/yolov4-tiny.cfg -O models/tinyyolov4/yolov4-tiny.cfg && \
+		# wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/tinyyolov4/coco.names && \
+		# mkdir -p models/yolov4 && \
+		# wget https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/yolov4.cfg -O models/yolov4/yolov4.cfg && \
+		# wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names -O models/yolov4/coco.names && \
+		# wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights -O models/yolov4/yolov4.weights && \
+		# mkdir -p models/coral_edgetpu && \
+		# wget https://dl.google.com/coral/canned_models/coco_labels.txt -O models/coral_edgetpu/coco_indexed.names && \
+		# wget https://github.com/google-coral/edgetpu/raw/master/test_data/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite && \
+		# wget https://github.com/google-coral/test_data/raw/master/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssdlite_mobiledet_coco_qat_postprocess_edgetpu.tflite && \
+		# wget https://github.com/google-coral/test_data/raw/master/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite -O models/coral_edgetpu/ssd_mobilenet_v2_face_quant_postprocess_edgetpu.tflite && \
 		apt-get clean autoclean && \
 		apt-get autoremove --yes && \
 		rm -rf /var/lib/{apt,dpkg,cache,log}
